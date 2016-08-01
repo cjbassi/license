@@ -13,6 +13,7 @@ import (
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/nishanths/license/pkg/license"
+	"github.com/termie/go-shutil"
 )
 
 func update() {
@@ -123,7 +124,7 @@ func doUpdate() error {
 	if err := os.RemoveAll(licensePath); err != nil {
 		return err
 	}
-	return os.Rename(tempRoot, licensePath)
+	return shutil.CopyTree(tempRoot, licensePath, nil)
 }
 
 // convertAPIError handles HTTP errors as a special case
